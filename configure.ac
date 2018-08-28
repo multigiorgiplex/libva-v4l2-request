@@ -65,16 +65,10 @@ PKG_CHECK_MODULES(LIBVA_DEPS,     [libva >= va_api_version])
 
 dnl Check for VA/DRM API
 PKG_CHECK_MODULES(LIBVA_DRM_DEPS, [libva-drm],
-  [AC_DEFINE([HAVE_VA_DRM], [1], [Defined to 1 if VA/DRM API is enabled])],
-  [USE_DRM="no"])
+  [AC_DEFINE([HAVE_VA_DRM], [1], [Defined to 1 if VA/DRM API is enabled])])
 
-# Check for <drm_fourcc.h>
-if test "$USE_DRM" = "yes"; then
-    saved_CPPFLAGS="$CPPFLAGS"
-    CPPFLAGS="$CPPFLAGS $DRM_CFLAGS"
-    AC_CHECK_HEADERS([drm_fourcc.h], [:], [USE_DRM="no"])
-    CPPFLAGS="$saved_CPPFLAGS"
-fi
+# Check for <drm/drm_fourcc.h>
+AC_CHECK_HEADERS([drm/drm_fourcc.h])
 
 VA_VERSION=`$PKG_CONFIG --modversion libva`
 VA_MAJOR_VERSION=`echo "$VA_VERSION" | cut -d'.' -f1`

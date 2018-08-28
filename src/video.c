@@ -28,7 +28,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 
-#include <drm_fourcc.h>
+#include <drm/drm_fourcc.h>
 #include <linux/videodev2.h>
 
 #include "utils.h"
